@@ -10,7 +10,6 @@ import java.nio.charset.Charset;
 public class getRuntimeCls {
     public static void main(String[] args) throws Exception{
 
-
         // 调用runtime
         Class<?> runTimeClass = Class.forName("java.lang.Runtime");//先找到Runtime这个Class的Class类
         // getDeclared可以获取私有的
@@ -39,6 +38,9 @@ public class getRuntimeCls {
         while ((result = errorReader.readLine()) != null) {
             System.err.println("Error: " + result); // 输出错误信息
         }
+
+
+
 
 
     }

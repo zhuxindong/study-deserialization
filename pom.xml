@@ -6,4 +6,25 @@
   <version>1.0-SNAPSHOT</version>
   <name>Archetype - study-deserialization</name>
   <url>http://maven.apache.org</url>
+
+
+
+  <dependencies>
+    <dependency>
+      <groupId>commons-collections</groupId>
+      <artifactId>commons-collections</artifactId>
+      <version>3.1</version>
+    </dependency>
+  </dependencies>
+
+
+
+
+
+
+
+
+
 </project>
+
+
