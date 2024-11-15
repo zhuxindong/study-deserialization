@@ -12,6 +12,9 @@ public class GetRuntimeByClass {
         Class clazz = Runtime.class;
         Method getRuntimeMethod = clazz.getDeclaredMethod("getRuntime");
         Runtime runtime = (Runtime) getRuntimeMethod.invoke(null);
+        Method exec = clazz.getDeclaredMethod("exec",String[].class,String[].class);
+        exec.invoke(runtime,new String[]{"calc"},null);
+
         System.out.println(runtime);
 
 
