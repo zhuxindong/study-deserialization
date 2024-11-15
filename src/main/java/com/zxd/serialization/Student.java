@@ -54,4 +54,11 @@ public class Student implements Serializable {
         this.age = age;
     }
 
+    @Override
+    public String toString() {
+        return "Student{" +
+                "name='" + name + '\'' +
+                ", age=" + age +
+                '}';
+    }
 }
